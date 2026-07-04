@@ -129,6 +129,16 @@ export const initDb = async () => {
     );
   `);
 
+  // Auto-seed Akun Demo (untuk Google Play Console)
+  const demoExists = await database.getFirstAsync('SELECT id_pengguna FROM pengguna WHERE username = ?', ['12345']);
+  if (!demoExists) {
+    await database.runAsync(
+      'INSERT INTO pengguna (username, nama_lengkap, password_hash, pertanyaan_keamanan, jawaban_keamanan, mata_pelajaran) VALUES (?, ?, ?, ?, ?, ?)',
+      ['12345', 'Akun Demo (Reviewer)', '12345', 'Siapa nama Anda?', 'demo', 'Umum']
+    );
+    console.log('Akun demo (12345) berhasil dibuat otomatis.');
+  }
+
   await database.execAsync(`PRAGMA user_version = ${DB_VERSION};`);
   console.log(`DB siap (v${DB_VERSION})`);
 };

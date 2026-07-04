@@ -3,6 +3,7 @@ import { View, ActivityIndicator, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { initDb } from './src/database/db';
 import useStore from './src/store/useStore';
@@ -56,9 +57,8 @@ function DashboardTabs() {
           backgroundColor: '#fff',
           borderTopWidth: 1,
           borderTopColor: '#e2e8f0',
-          height: 60,
           paddingBottom: 8,
-          paddingTop: 6,
+          paddingTop: 8,
         },
         tabBarLabelStyle: {
           fontSize: 10,
@@ -151,35 +151,37 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={user ? (activePeriod ? 'Dashboard' : 'PeriodSetup') : 'Login'}
-        screenOptions={{ headerShown: false }}
-      >
-        {/* Auth Screens */}
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName={user ? (activePeriod ? 'Dashboard' : 'PeriodSetup') : 'Login'}
+          screenOptions={{ headerShown: false }}
+        >
+          {/* Auth Screens */}
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
 
-        {/* Setup */}
-        <Stack.Screen name="PeriodSetup" component={PeriodSetupScreen} />
+          {/* Setup */}
+          <Stack.Screen name="PeriodSetup" component={PeriodSetupScreen} />
 
-        {/* Dashboard Tabs */}
-        <Stack.Screen name="Dashboard" component={DashboardTabs} />
+          {/* Dashboard Tabs */}
+          <Stack.Screen name="Dashboard" component={DashboardTabs} />
 
-        {/* Push Screens (dari dalam tab) */}
-        <Stack.Screen
-          name="ClassDetail"
-          component={ClassDetailScreen}
-          options={({ route }) => ({
-            headerShown: true,
-            title: route.params?.nama_kelas || 'Detail Kelas',
-            headerStyle: { backgroundColor: '#1d4ed8' },
-            headerTintColor: '#fff',
-            headerTitleStyle: { fontWeight: 'bold' },
-          })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          {/* Push Screens (dari dalam tab) */}
+          <Stack.Screen
+            name="ClassDetail"
+            component={ClassDetailScreen}
+            options={({ route }) => ({
+              headerShown: true,
+              title: route.params?.nama_kelas || 'Detail Kelas',
+              headerStyle: { backgroundColor: '#1d4ed8' },
+              headerTintColor: '#fff',
+              headerTitleStyle: { fontWeight: 'bold' },
+            })}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

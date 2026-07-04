@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GuruAbsen",
-    "slug": "GuruAbsen",
+    "name": "EduPresensi",
+    "slug": "EduPresensi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,6 +10,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.bansei.edupresensi",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -24,6 +25,12 @@
       "expo-sqlite",
       "expo-sharing",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "cb9d2208-6529-4f84-941b-f09c722fa416"
+      }
+    },
+    "owner": "andrifernanda"
   }
 }

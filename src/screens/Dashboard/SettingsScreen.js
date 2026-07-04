@@ -12,6 +12,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import * as Sharing from 'expo-sharing';
 import * as Crypto from 'expo-crypto';
 import * as SQLite from 'expo-sqlite';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function SettingsScreen({ navigation }) {
@@ -344,7 +345,17 @@ export default function SettingsScreen({ navigation }) {
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
       {/* Header Profil */}
-      <View style={styles.header}>
+      <LinearGradient
+        colors={['#1d4ed8', '#3b82f6', '#60a5fa']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.header}
+      >
+        {/* Dekorasi lingkaran */}
+        <View style={styles.decoCircle1} />
+        <View style={styles.decoCircle2} />
+        <View style={styles.decoCircle3} />
+
         <View style={styles.headerAvatar}>
           <Text style={styles.headerAvatarText}>
             {(user?.nama_lengkap || user?.username || '?').charAt(0).toUpperCase()}
@@ -363,7 +374,7 @@ export default function SettingsScreen({ navigation }) {
             </View>
           )}
         </View>
-      </View>
+      </LinearGradient>
 
       {/* Seksi Profil & Akun */}
       <View style={styles.section}>
@@ -627,7 +638,19 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8fafc' },
   header: {
     flexDirection: 'row', alignItems: 'center', gap: 16,
-    backgroundColor: '#1d4ed8', padding: 20, paddingTop: 24,
+    padding: 20, paddingTop: 24, overflow: 'hidden',
+  },
+  decoCircle1: {
+    position: 'absolute', width: 120, height: 120, borderRadius: 60,
+    backgroundColor: 'rgba(255,255,255,0.08)', top: -30, right: -20,
+  },
+  decoCircle2: {
+    position: 'absolute', width: 80, height: 80, borderRadius: 40,
+    backgroundColor: 'rgba(255,255,255,0.06)', bottom: -10, left: 30,
+  },
+  decoCircle3: {
+    position: 'absolute', width: 50, height: 50, borderRadius: 25,
+    backgroundColor: 'rgba(255,255,255,0.1)', top: 20, left: -10,
   },
   headerAvatar: {
     width: 56, height: 56, borderRadius: 28,

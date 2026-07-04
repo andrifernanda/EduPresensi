@@ -69,12 +69,12 @@ function DashboardTabs() {
         },
         headerStyle: {
           backgroundColor: '#1d4ed8',
-          height: 50 + insets.top,
+          height: 44 + insets.top,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-          fontSize: 15,
+          fontSize: 14,
         },
       })}
     >

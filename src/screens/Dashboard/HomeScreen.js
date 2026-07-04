@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, StatusBar,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import useStore from '../../store/useStore';
 import { getDb } from '../../database/db';
@@ -72,9 +73,19 @@ export default function HomeScreen({ navigation }) {
       <StatusBar barStyle="light-content" backgroundColor="#1d4ed8" />
       
       {/* Header Beranda */}
-      <View style={styles.header}>
+      <LinearGradient
+        colors={['#1d4ed8', '#3b82f6', '#60a5fa']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.header}
+      >
+        {/* Dekorasi lingkaran */}
+        <View style={styles.decoCircle1} />
+        <View style={styles.decoCircle2} />
+        <View style={styles.decoCircle3} />
+
         <View style={styles.headerTop}>
-          <View>
+          <View style={{ flex: 1 }}>
             <Text style={styles.greeting}>Halo, {user?.nama_lengkap || user?.username} 👋</Text>
             <Text style={styles.dateText}>
               {new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
@@ -89,7 +100,7 @@ export default function HomeScreen({ navigation }) {
 
         {activePeriod && (
           <View style={styles.activePeriodBox}>
-            <Ionicons name="calendar-outline" size={20} color="#fff" />
+            <Ionicons name="calendar-outline" size={18} color="#fff" />
             <View style={{ flex: 1 }}>
               <Text style={styles.periodTitle}>Tahun Ajaran Aktif</Text>
               <Text style={styles.periodValue}>
@@ -98,7 +109,7 @@ export default function HomeScreen({ navigation }) {
             </View>
           </View>
         )}
-      </View>
+      </LinearGradient>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Ringkasan Statistik */}
@@ -152,23 +163,36 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8fafc' },
   header: {
-    backgroundColor: '#1d4ed8', padding: 24, paddingTop: 16,
-    borderBottomLeftRadius: 24, borderBottomRightRadius: 24,
+    padding: 20, paddingTop: 14,
+    borderBottomLeftRadius: 20, borderBottomRightRadius: 20,
+    overflow: 'hidden',
   },
-  headerTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 },
-  greeting: { fontSize: 22, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
-  dateText: { fontSize: 13, color: '#bfdbfe' },
+  decoCircle1: {
+    position: 'absolute', width: 120, height: 120, borderRadius: 60,
+    backgroundColor: 'rgba(255,255,255,0.08)', top: -30, right: -20,
+  },
+  decoCircle2: {
+    position: 'absolute', width: 80, height: 80, borderRadius: 40,
+    backgroundColor: 'rgba(255,255,255,0.06)', bottom: -10, left: 30,
+  },
+  decoCircle3: {
+    position: 'absolute', width: 50, height: 50, borderRadius: 25,
+    backgroundColor: 'rgba(255,255,255,0.1)', top: 20, left: -10,
+  },
+  headerTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
+  greeting: { fontSize: 20, fontWeight: 'bold', color: '#fff', marginBottom: 3 },
+  dateText: { fontSize: 12, color: '#e9d5ff' },
   avatar: {
-    width: 48, height: 48, borderRadius: 24,
+    width: 44, height: 44, borderRadius: 22,
     backgroundColor: 'rgba(255,255,255,0.25)', justifyContent: 'center', alignItems: 'center',
   },
-  avatarText: { fontSize: 20, fontWeight: 'bold', color: '#fff' },
+  avatarText: { fontSize: 18, fontWeight: 'bold', color: '#fff' },
   activePeriodBox: {
-    flexDirection: 'row', alignItems: 'center', gap: 14,
-    backgroundColor: 'rgba(255,255,255,0.15)', padding: 16, borderRadius: 16,
+    flexDirection: 'row', alignItems: 'center', gap: 12,
+    backgroundColor: 'rgba(255,255,255,0.15)', padding: 12, borderRadius: 12,
   },
-  periodTitle: { fontSize: 12, color: '#bfdbfe', marginBottom: 2 },
-  periodValue: { fontSize: 15, fontWeight: 'bold', color: '#fff' },
+  periodTitle: { fontSize: 11, color: '#e9d5ff', marginBottom: 2 },
+  periodValue: { fontSize: 14, fontWeight: 'bold', color: '#fff' },
   scrollContent: { padding: 20, paddingBottom: 40 },
   sectionTitle: { fontSize: 16, fontWeight: 'bold', color: '#0f172a', marginBottom: 12, marginTop: 4 },
   statsGrid: { flexDirection: 'row', gap: 12, marginBottom: 24 },

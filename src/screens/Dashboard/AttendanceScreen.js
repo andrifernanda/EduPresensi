@@ -494,12 +494,9 @@ export default function AttendanceScreen() {
             }}
             activeOpacity={0.7}
           >
-            <Ionicons name="calendar" size={20} color="#1d4ed8" />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.dateLabel}>Tanggal Absensi</Text>
-              <Text style={styles.dateValue}>{formatDateLabel(date)}</Text>
-            </View>
-            <Ionicons name="chevron-down" size={20} color="#94a3b8" />
+            <Ionicons name="calendar" size={16} color="#1d4ed8" />
+            <Text style={styles.dateValue}>{formatDateLabel(date)}</Text>
+            <Ionicons name="chevron-down" size={16} color="#94a3b8" />
           </TouchableOpacity>
         )}
 
@@ -534,11 +531,11 @@ export default function AttendanceScreen() {
       {/* Info Kelas & Summary Rekap (Hanya di Tab Harian) */}
       {activeMainTab === 'harian' && students.length > 0 && (
         <View style={styles.classInfoPanel}>
-          <View style={styles.classInfoHeader}>
-            <Ionicons name="people" size={16} color="#64748b" />
-            <Text style={styles.classInfoTitle}>Total Siswa di Kelas: <Text style={{ color: '#0f172a' }}>{students.length}</Text></Text>
-          </View>
           <View style={styles.summaryRow}>
+            <View style={styles.summaryItemTotal}>
+              <Ionicons name="people" size={14} color="#64748b" />
+              <Text style={styles.summaryTotalText}>{students.length} Siswa</Text>
+            </View>
             {summary.map(s => (
               <View key={s.key} style={styles.summaryItem}>
                 <Text style={styles.summaryNum}>{s.count}</Text>
@@ -652,37 +649,36 @@ const styles = StyleSheet.create({
   centerText: { fontSize: 16, color: '#64748b', marginTop: 12 },
   
   topTabs: {
-    flexDirection: 'row', padding: 12, backgroundColor: '#fff',
-    borderBottomWidth: 1, borderBottomColor: '#e2e8f0', gap: 10,
+    flexDirection: 'row', paddingHorizontal: 12, paddingVertical: 8, backgroundColor: '#fff',
+    borderBottomWidth: 1, borderBottomColor: '#e2e8f0', gap: 8,
   },
   topTabBtn: {
-    flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-    paddingVertical: 10, borderRadius: 10,
+    flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5,
+    paddingVertical: 7, borderRadius: 8,
     backgroundColor: '#f1f5f9', borderWidth: 1.5, borderColor: '#e2e8f0',
   },
-  topTabBtnActive: { backgroundColor: '#2563eb', borderColor: '#2563eb' },
-  topTabText: { fontSize: 13, fontWeight: '700', color: '#64748b' },
+  topTabBtnActive: { backgroundColor: '#8b5cf6', borderColor: '#8b5cf6' },
+  topTabText: { fontSize: 12, fontWeight: '700', color: '#64748b' },
   topTabTextActive: { color: '#fff' },
 
   controls: {
-    backgroundColor: '#fff', padding: 16, paddingTop: 12,
+    backgroundColor: '#fff', paddingHorizontal: 12, paddingVertical: 8,
     borderBottomWidth: 1, borderBottomColor: '#e2e8f0',
   },
   dateSelector: {
-    flexDirection: 'row', alignItems: 'center', gap: 12,
-    backgroundColor: '#eff6ff', padding: 14, borderRadius: 12,
-    borderWidth: 1.5, borderColor: '#bfdbfe', marginBottom: 14,
+    flexDirection: 'row', alignItems: 'center', gap: 8,
+    backgroundColor: '#eff6ff', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10,
+    borderWidth: 1.5, borderColor: '#bfdbfe', marginBottom: 8,
   },
-  dateLabel: { fontSize: 11, color: '#2563eb', fontWeight: '700', marginBottom: 2 },
-  dateValue: { fontSize: 16, fontWeight: 'bold', color: '#1e40af' },
+  dateValue: { flex: 1, fontSize: 14, fontWeight: 'bold', color: '#1e40af' },
   classScroll: { flexDirection: 'row' },
   classChip: {
-    flexDirection: 'row', alignItems: 'center', gap: 6,
-    paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-    backgroundColor: '#f1f5f9', marginRight: 10, borderWidth: 1.5, borderColor: '#e2e8f0',
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    paddingHorizontal: 12, paddingVertical: 7, borderRadius: 16,
+    backgroundColor: '#f1f5f9', marginRight: 8, borderWidth: 1.5, borderColor: '#e2e8f0',
   },
   classChipActive: { backgroundColor: '#2563eb', borderColor: '#2563eb' },
-  classChipText: { fontSize: 14, fontWeight: '600', color: '#64748b' },
+  classChipText: { fontSize: 13, fontWeight: '600', color: '#64748b' },
   classChipTextActive: { color: '#fff' },
   noClassBanner: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   noClassText: { fontSize: 13, color: '#ef4444' },
@@ -692,13 +688,15 @@ const styles = StyleSheet.create({
   },
   classInfoHeader: {
     flexDirection: 'row', alignItems: 'center', gap: 6,
-    paddingHorizontal: 16, paddingTop: 14, paddingBottom: 6,
+    paddingHorizontal: 12, paddingTop: 8, paddingBottom: 4,
   },
-  classInfoTitle: { fontSize: 13, fontWeight: '600', color: '#64748b' },
-  summaryRow: { flexDirection: 'row', padding: 12, gap: 8 },
-  summaryItem: { flex: 1, alignItems: 'center', paddingVertical: 8, borderRadius: 10, backgroundColor: '#f8fafc', borderWidth: 1, borderColor: '#e2e8f0' },
-  summaryNum: { fontSize: 20, fontWeight: 'bold', color: '#334155' },
-  summaryLabel: { fontSize: 10, fontWeight: '700', marginTop: 2, color: '#334155' },
+  classInfoTitle: { fontSize: 12, fontWeight: '600', color: '#64748b' },
+  summaryRow: { flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 6, gap: 6 },
+  summaryItemTotal: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 8, backgroundColor: '#f1f5f9', borderWidth: 1, borderColor: '#e2e8f0' },
+  summaryTotalText: { fontSize: 12, fontWeight: '700', color: '#64748b' },
+  summaryItem: { flex: 1, alignItems: 'center', paddingVertical: 4, borderRadius: 8, backgroundColor: '#f8fafc', borderWidth: 1, borderColor: '#e2e8f0' },
+  summaryNum: { fontSize: 16, fontWeight: 'bold', color: '#334155' },
+  summaryLabel: { fontSize: 9, fontWeight: '700', marginTop: 1, color: '#334155' },
   listContainer: { padding: 16, paddingBottom: 32 },
   
   exportBar: {

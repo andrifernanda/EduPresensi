@@ -130,13 +130,35 @@ export const initDb = async () => {
   `);
 
   // Auto-seed Akun Demo (untuk Google Play Console)
-  const demoExists = await database.getFirstAsync('SELECT id_pengguna FROM pengguna WHERE username = ?', ['12345']);
+  const demoExists = await database.getFirstAsync('SELECT id_pengguna, password_hash FROM pengguna WHERE username = ?', ['12345']);
+  
+  let demoUserId = null;
+  
   if (!demoExists) {
-    await database.runAsync(
+    const result = await database.runAsync(
       'INSERT INTO pengguna (username, nama_lengkap, password_hash, pertanyaan_keamanan, jawaban_keamanan, mata_pelajaran) VALUES (?, ?, ?, ?, ?, ?)',
-      ['12345', 'Akun Demo (Reviewer)', '12345', 'Siapa nama Anda?', 'demo', 'Umum']
+      ['12345', 'Akun Demo (Reviewer)', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'Siapa nama Anda?', 'demo', 'Umum']
     );
+    demoUserId = result.lastInsertRowId;
     console.log('Akun demo (12345) berhasil dibuat otomatis.');
+  } else {
+    demoUserId = demoExists.id_pengguna;
+    if (demoExists.password_hash === '12345') {
+      // Perbaiki password hash yang salah pada versi sebelumnya
+      await database.runAsync('UPDATE pengguna SET password_hash = ? WHERE username = ?', ['5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', '12345']);
+    }
+  }
+
+  // Pastikan akun demo sudah memiliki Tahun Ajaran 2026/2027 yang aktif agar langsung masuk Dashboard
+  if (demoUserId) {
+    const periodExists = await database.getFirstAsync('SELECT id_periode FROM periode_ajaran WHERE id_pengguna = ?', [demoUserId]);
+    if (!periodExists) {
+      await database.runAsync(
+        'INSERT INTO periode_ajaran (id_pengguna, tahun_ajaran, semester, is_active) VALUES (?, ?, ?, ?)',
+        [demoUserId, '2026/2027', 'Ganjil', 1]
+      );
+      console.log('Periode aktif 2026/2027 untuk akun demo ditambahkan.');
+    }
   }
 
   await database.execAsync(`PRAGMA user_version = ${DB_VERSION};`);

@@ -819,7 +819,7 @@ const styles = StyleSheet.create({
     paddingVertical: 9, borderRadius: 10,
     backgroundColor: '#f1f5f9', borderWidth: 1.5, borderColor: '#e2e8f0',
   },
-  topTabBtnActive: { backgroundColor: '#2563eb', borderColor: '#2563eb' },
+  topTabBtnActive: { backgroundColor: '#8b5cf6', borderColor: '#8b5cf6' },
   topTabText: { fontSize: 11, fontWeight: '700', color: '#64748b' },
   topTabTextActive: { color: '#fff' },
 

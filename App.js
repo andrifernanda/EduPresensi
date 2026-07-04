@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { initDb } from './src/database/db';
 import useStore from './src/store/useStore';
@@ -31,6 +31,8 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function DashboardTabs() {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -57,7 +59,8 @@ function DashboardTabs() {
           backgroundColor: '#fff',
           borderTopWidth: 1,
           borderTopColor: '#e2e8f0',
-          paddingBottom: 8,
+          height: 65 + insets.bottom,
+          paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
           paddingTop: 8,
         },
         tabBarLabelStyle: {
@@ -66,11 +69,12 @@ function DashboardTabs() {
         },
         headerStyle: {
           backgroundColor: '#1d4ed8',
+          height: 50 + insets.top,
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-          fontSize: 17,
+          fontSize: 15,
         },
       })}
     >

@@ -346,7 +346,6 @@ export default function StudentListScreen() {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#f8fafc" />
       <View style={styles.searchBar}>
         <Ionicons name="search-outline" size={18} color="#94a3b8" style={{ marginRight: 8 }} />
         <TextInput
@@ -482,8 +481,8 @@ export default function StudentListScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8fafc' },
-  searchBar: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', margin: 16, marginBottom: 10, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 12, borderWidth: 1.5, borderColor: '#e2e8f0' },
-  searchInput: { flex: 1, fontSize: 15, color: '#0f172a' },
+  searchBar: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', marginHorizontal: 16, marginTop: 12, marginBottom: 8, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 10, borderWidth: 1.5, borderColor: '#e2e8f0' },
+  searchInput: { flex: 1, fontSize: 13, color: '#0f172a' },
   actionRow: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16, marginBottom: 12, gap: 12 },
   actionBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#eff6ff', paddingVertical: 10, borderRadius: 12, gap: 6 },
   actionBtnText: { fontSize: 14, fontWeight: '600', color: '#2563eb' },

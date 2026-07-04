@@ -140,8 +140,8 @@ export default function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate('Nilai')}
         />
         <MenuCard
-          icon="document-text" color="#f59e0b" title="Laporan & Ekspor"
-          desc="Cetak rekap ke PDF atau Excel"
+          icon="server" color="#f59e0b" title="Cadangkan Database"
+          desc="Backup & pulihkan data aplikasi"
           onPress={() => navigation.navigate('Pengaturan')}
         />
       </ScrollView>

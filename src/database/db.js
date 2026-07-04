@@ -155,7 +155,7 @@ export const initDb = async () => {
     if (!periodExists) {
       await database.runAsync(
         'INSERT INTO periode_ajaran (id_pengguna, tahun_ajaran, semester, is_active) VALUES (?, ?, ?, ?)',
-        [demoUserId, '2026/2027', 'Ganjil', 1]
+        [demoUserId, '2026/2027', 1, 1]
       );
       console.log('Periode aktif 2026/2027 untuk akun demo ditambahkan.');
     }
